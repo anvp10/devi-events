@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devi — Garba RSVP</title>
+<style>
+  :root{
+    --plum: #2b0f3a;
+    --plum-deep: #1a0826;
+    --magenta: #e6237e;
+    --violet: #8b2fc9;
+    --gold: #ffc857;
+    --ivory: #fdf3f7;
+    --rose-muted: #d9a8c4;
+    --font-display: 'Futura', 'Century Gothic', 'Trebuchet MS', sans-serif;
+    --font-sans: 'Avenir Next', 'Century Gothic', 'Segoe UI', system-ui, sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html, body{ margin: 0; padding: 0; background: var(--plum-deep); }
+
+  .stage{
+    min-height: 100vh;
+    width: 100%;
+    background:
+      radial-gradient(ellipse at 50% 0%, #4a1a5c 0%, var(--plum-deep) 60%),
+      var(--plum-deep);
+    display: flex;
+    justify-content: center;
+    padding: clamp(1.25rem, 4vw, 3rem) 1rem;
+    font-family: var(--font-sans);
+  }
+
+  .card{
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, var(--plum) 0%, var(--plum-deep) 100%);
+    border: 1px solid rgba(230,35,126,0.35);
+    border-radius: 14px;
+    box-shadow: 0 30px 60px -25px rgba(0,0,0,0.65);
+    padding: clamp(1.5rem, 5vw, 2.25rem);
+    color: var(--ivory);
+  }
+
+  .wordmark{
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--rose-muted);
+    text-align: center;
+    margin-bottom: 0.6rem;
+  }
+
+  h1{
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    text-align: center;
+    text-wrap: balance;
+    margin: 0 0 0.35em;
+    color: var(--ivory);
+    text-shadow: 0 0 18px rgba(230,35,126,0.55);
+  }
+
+  .recap{
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--rose-muted);
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+  .recap strong{ color: var(--gold); font-weight: 700; }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  label{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  input, select{
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75em 0.9em;
+    border-radius: 8px;
+    border: 1.5px solid rgba(253,243,247,0.2);
+    background: rgba(253,243,247,0.06);
+    color: var(--ivory);
+    outline: none;
+  }
+  input::placeholder{ color: rgba(253,243,247,0.35); }
+  input:focus, select:focus{
+    border-color: var(--magenta);
+    box-shadow: 0 0 0 3px rgba(230,35,126,0.25);
+  }
+  select option{ background: var(--plum); color: var(--ivory); }
+
+  button{
+    margin-top: 0.3rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    padding: 0.9em 1em;
+    border: none;
+    border-radius: 999px;
+    color: var(--plum-deep);
+    background: linear-gradient(90deg, var(--gold), #ffe3a3);
+    cursor: pointer;
+    box-shadow: 0 10px 25px -8px rgba(255,200,87,0.6);
+    transition: transform 0.15s ease;
+  }
+  button:hover{ transform: translateY(-1px); }
+  button:focus-visible{ outline: 3px solid var(--magenta); outline-offset: 2px; }
+  button:active{ transform: translateY(0); }
+
+  .hint{
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--rose-muted);
+    margin-top: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .status{
+    display: none;
+    margin-top: 1rem;
+    padding: 0.9em 1em;
+    border-radius: 8px;
+    background: rgba(139,47,201,0.25);
+    border: 1px solid rgba(139,47,201,0.5);
+    font-size: 0.82rem;
+    text-align: center;
+    color: var(--ivory);
+  }
+  .status.show{ display: block; }
+
+  .badges{
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 1.1rem;
+    flex-wrap: wrap;
+  }
+  .badge{
+    padding: 0.3em 0.8em;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .badge.women{ background: rgba(230,35,126,0.2); border: 1px solid var(--magenta); color: #ff8fbd; }
+  .badge.spots{ background: rgba(255,200,87,0.15); border: 1px solid var(--gold); color: var(--gold); }
+
+  .waiver-row{
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6em;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: var(--rose-muted);
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: normal;
+  }
+  .waiver-row input[type="checkbox"]{
+    margin-top: 0.2em;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--magenta);
+    flex-shrink: 0;
+  }
+  .waiver-row strong{ color: var(--ivory); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="card">
+    <div class="wordmark">Devi</div>
+    <h1>Reserve Your Spot</h1>
+    <div class="badges">
+      <span class="badge women">Women Only</span>
+      <span class="badge spots">20 Spots Total</span>
+    </div>
+    <p class="recap">Free Trial Garba Class &middot; <strong>Sun, Aug 23, 10:30&ndash;11:30 AM</strong> &middot; Allen, TX<br/>Exact venue sent after you RSVP</p>
+
+    <form id="rsvpForm">
+      <label>Full Name
+        <input type="text" id="name" placeholder="Your name" required />
+      </label>
+      <label>Phone Number
+        <input type="tel" id="phone" placeholder="(xxx) xxx-xxxx" required />
+      </label>
+      <label>Guests (including you)
+        <select id="guests">
+          <option value="1">Just me</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </label>
+      <label class="waiver-row" for="waiver">
+        <input type="checkbox" id="waiver" required />
+        <span><strong>I agree to the Terms &amp; Liability Waiver:</strong> I understand garba and dance activities involve physical movement and inherent risk of injury. I voluntarily assume that risk for myself and any guests I bring, and I release Devi, its instructors, staff, and the venue from liability for any personal, professional, or property injury or damage arising from participation in this class.</span>
+      </label>
+      <button type="submit">Reserve My Spot</button>
+    </form>
+
+    <div class="status" id="status">You're almost in! WhatsApp should have opened with your details filled in &mdash; hit send and you've got your spot. If nothing opened, message us directly on WhatsApp at <strong>(214) 509-8178</strong>.</div>
+
+    <p class="hint">Tapping "Reserve My Spot" opens WhatsApp with your details pre-filled &mdash; just hit send to confirm. No account or app download needed.</p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('rsvpForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var guests = document.getElementById('guests').value;
+
+    var message =
+      'Hi! I\'d like to RSVP for the free trial garba class (Sun Aug 23, 10:30-11:30 AM, Allen, TX).\n\n' +
+      'Name: ' + name + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Guests (incl. me): ' + guests + '\n' +
+      'Agreed to Terms & Liability Waiver: Yes';
+    var waLink = 'https://wa.me/12145098178?text=' + encodeURIComponent(message);
+
+    window.location.href = waLink;
+
+    var status = document.getElementById('status');
+    status.classList.add('show');
+  });
+</script>
+</body>
+</html>
