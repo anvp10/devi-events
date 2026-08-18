@@ -213,6 +213,13 @@
           <option value="4">4</option>
         </select>
       </label>
+      <label>Garba Skill Level
+        <select id="skill">
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </label>
       <label class="waiver-row" for="waiver">
         <input type="checkbox" id="waiver" required />
         <span><strong>I agree to the Terms &amp; Liability Waiver:</strong> I understand garba and dance activities involve physical movement and inherent risk of injury. I voluntarily assume that risk for myself and any guests I bring, and I release Devi, its instructors, staff, and the venue from liability for any personal, professional, or property injury or damage arising from participation in this class.</span>
@@ -232,12 +239,14 @@
     var name = document.getElementById('name').value.trim();
     var phone = document.getElementById('phone').value.trim();
     var guests = document.getElementById('guests').value;
+    var skill = document.getElementById('skill').value;
 
     var message =
       'Hi! I\'d like to RSVP for the free trial garba class (Sun Aug 23, 10:30-11:30 AM, Allen, TX).\n\n' +
       'Name: ' + name + '\n' +
       'Phone: ' + phone + '\n' +
       'Guests (incl. me): ' + guests + '\n' +
+      'Garba Skill Level: ' + skill + '\n' +
       'Agreed to Terms & Liability Waiver: Yes';
     var waLink = 'https://wa.me/12145098178?text=' + encodeURIComponent(message);
 
