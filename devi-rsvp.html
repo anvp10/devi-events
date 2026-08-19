@@ -191,12 +191,12 @@
 <div class="stage">
   <div class="card">
     <div class="wordmark">Devi</div>
-    <h1>Reserve Your Spot</h1>
+    <h1>Free Garba Workshop is Full</h1>
     <div class="badges">
       <span class="badge women">Women Only</span>
-      <span class="badge spots">20 Spots Total</span>
+      <span class="badge spots">Trial Full</span>
     </div>
-    <p class="recap">Free Trial Garba Class &middot; <strong>Sun, Aug 23, 5:00&ndash;6:00 PM</strong> &middot; Allen, TX<br/>Exact venue sent after you RSVP</p>
+    <p class="recap">Our free garba workshop (Sun, Aug 23, 5:00&ndash;6:00 PM, Allen, TX) is full. Drop in your details below to learn more about our paid classes.</p>
 
     <form id="rsvpForm">
       <label>Full Name
@@ -205,14 +205,6 @@
       <label>Phone Number
         <input type="tel" id="phone" placeholder="(xxx) xxx-xxxx" required />
       </label>
-      <label>Guests (including you)
-        <select id="guests">
-          <option value="1">Just me</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </label>
       <label>Garba Skill Level
         <select id="skill">
           <option value="Beginner">Beginner</option>
@@ -220,16 +212,12 @@
           <option value="Advanced">Advanced</option>
         </select>
       </label>
-      <label class="waiver-row" for="waiver">
-        <input type="checkbox" id="waiver" required />
-        <span><strong>I agree to the Terms &amp; Liability Waiver:</strong> I understand garba and dance activities involve physical movement and inherent risk of injury. I voluntarily assume that risk for myself and any guests I bring, and I release Devi, its instructors, staff, and the venue from liability for any personal, professional, or property injury or damage arising from participation in this class.</span>
-      </label>
-      <button type="submit">Reserve My Spot</button>
+      <button type="submit">Learn More About Paid Classes</button>
     </form>
 
-    <div class="status" id="status">You're almost in! WhatsApp should have opened with your details filled in &mdash; hit send and you've got your spot. If nothing opened, message us directly on WhatsApp at <strong>(214) 509-8178</strong>.</div>
+    <div class="status" id="status">You're on the list! WhatsApp should have opened with your details filled in &mdash; hit send and we'll reach out as soon as paid classes open. If nothing opened, message us directly on WhatsApp at <strong>(214) 509-8178</strong>.</div>
 
-    <p class="hint">Tapping "Reserve My Spot" opens WhatsApp with your details pre-filled &mdash; just hit send to confirm. No account or app download needed.</p>
+    <p class="hint">Tapping the button opens WhatsApp with your details pre-filled &mdash; just hit send. No account or app download needed.</p>
   </div>
 </div>
 
@@ -238,16 +226,13 @@
     e.preventDefault();
     var name = document.getElementById('name').value.trim();
     var phone = document.getElementById('phone').value.trim();
-    var guests = document.getElementById('guests').value;
     var skill = document.getElementById('skill').value;
 
     var message =
-      'Hi! I\'d like to RSVP for the free trial garba class (Sun Aug 23, 5:00-6:00 PM, Allen, TX).\n\n' +
+      'Hi! The free trial garba class is full, but I\'d like to be notified when paid classes open for registration.\n\n' +
       'Name: ' + name + '\n' +
       'Phone: ' + phone + '\n' +
-      'Guests (incl. me): ' + guests + '\n' +
-      'Garba Skill Level: ' + skill + '\n' +
-      'Agreed to Terms & Liability Waiver: Yes';
+      'Garba Skill Level: ' + skill;
     var waLink = 'https://wa.me/12145098178?text=' + encodeURIComponent(message);
 
     window.location.href = waLink;
